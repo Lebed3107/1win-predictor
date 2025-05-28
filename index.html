@@ -7,24 +7,24 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #111;
+      background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
       color: #fff;
       text-align: center;
       padding: 40px 20px;
     }
     .container {
-      background: #1c1c1c;
+      background: #1f1b3a;
       border-radius: 16px;
       padding: 30px;
-      max-width: 400px;
+      max-width: 420px;
       margin: auto;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
     }
     .btn {
       margin-top: 20px;
       padding: 14px 28px;
-      background-color: #00ff88;
-      color: #000;
+      background-color: #ff4d6d;
+      color: white;
       border: none;
       border-radius: 10px;
       font-weight: bold;
@@ -32,12 +32,22 @@
       font-size: 16px;
     }
     .btn:hover {
-      background-color: #00e07a;
+      background-color: #e63950;
+    }
+    select {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 16px;
+      border: none;
+      background-color: #fff;
+      color: #000;
     }
     .logo {
       font-size: 28px;
       font-weight: bold;
       margin-bottom: 10px;
+      color: #ffcc00;
     }
     .status {
       margin-top: 30px;
@@ -48,11 +58,20 @@
 </head>
 <body>
   <div class="container">
-    <div class="logo">📊 WinSignal</div>
+    <div class="logo">🎰 WinSignal</div>
     <p>Для использования приложения нужно привязать новый и чистый аккаунт.</p>
-    <p><strong>ПРОМОКОД – SU4KOVSTAS</strong></p>
+    <p><strong>ПРОМОКОД – DOGER</strong></p>
     <a class="btn" href="https://1w.run/?p=SqoO" target="_blank">Пройти регистрацию</a>
     <p style="margin-top: 15px; font-size: 14px; color: #aaa;">После регистрации появится Connected в правом верхнем углу</p>
+
+    <div style="margin-top: 30px;">
+      <label for="gameSelect">Выбери игру для анализа:</label><br>
+      <select id="gameSelect" onchange="showPrediction()">
+        <option value="aviator">✈️ Aviator</option>
+        <option value="bonanza">🍬 Sweet Bonanza</option>
+        <option value="olympus">⚡ Gates of Olympus</option>
+      </select>
+    </div>
 
     <div class="status" id="prediction">
       Загрузка прогноза...
@@ -60,20 +79,34 @@
   </div>
 
   <script>
-    const predictions = [
-      "🎰 Высокий шанс бонуски в течение ближайших 5 минут!",
-      "⚠️ Ожидается активация фриспинов, проверь игру!",
-      "🔥 Рекомендуем сделать 2-3 ставки — вероятен бонус!",
-      "📈 Алгоритм показывает рост RTP, время заходить!",
-      "🎯 Предсказание: возможен занос в ближайших 10 спинах.",
-      "🧠 AI считает: сейчас может выпасть бонус!"
-    ];
+    const gamePredictions = {
+      aviator: [
+        "📉 Ожидается быстрый спад — зайди ниже 1.25",
+        "✈️ Взлёт до x20 возможен через 2-3 раунда",
+        "🛫 Рекомендуется ловить до x1.75 ближайшие 5 минут",
+        "📊 Низкая волатильность — жди откат и заходи заново"
+      ],
+      bonanza: [
+        "🍬 Фриспины через 4–6 вращений",
+        "🎁 Скаттер вероятен в следующей серии",
+        "🍭 Алгоритм указывает на бонуску в ближайшее время",
+        "📉 Сейчас малый RTP — подожди пару спинов и заходи"
+      ],
+      olympus: [
+        "⚡ Мультипликатор x50 ожидается скоро",
+        "🔱 Zeus активен, бонус близко!",
+        "💥 x100 может появиться в следующей 10-ке спинов",
+        "⏱ Ожидается падение – дождись отката и заходи"
+      ]
+    };
 
     function showPrediction() {
-      const chance = Math.floor(Math.random() * 21) + 75; // от 75% до 95%
-      const prediction = predictions[Math.floor(Math.random() * predictions.length)];
-      const message = `${prediction} (Уверенность: ${chance}%)`;
-      document.getElementById("prediction").innerText = message;
+      const game = document.getElementById('gameSelect').value;
+      const predictionList = gamePredictions[game];
+      const randomIndex = Math.floor(Math.random() * predictionList.length);
+      const chance = Math.floor(Math.random() * 21) + 75; // 75–95%
+      const prediction = `${predictionList[randomIndex]} (Уверенность: ${chance}%)`;
+      document.getElementById("prediction").innerText = prediction;
     }
 
     window.onload = showPrediction;
