@@ -1,86 +1,82 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Прогноз фриспинов</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WinSignal</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #240046, #5a189a);
+      font-family: Arial, sans-serif;
+      background: #111;
       color: #fff;
       text-align: center;
-      padding: 20px;
+      padding: 40px 20px;
     }
-    h1 {
-      margin-top: 30px;
-      font-size: 26px;
-    }
-    p {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-    .upload-box {
-      background: #fff;
-      color: #000;
-      border-radius: 10px;
-      padding: 20px;
+    .container {
+      background: #1c1c1c;
+      border-radius: 16px;
+      padding: 30px;
       max-width: 400px;
-      margin: 20px auto;
+      margin: auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
-    .upload-box input[type="file"] {
-      display: block;
-      margin: 10px auto;
-    }
-    .result-box {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 20px;
+    .btn {
       margin-top: 20px;
-      border-radius: 12px;
-      display: none;
-    }
-    .button {
-      margin-top: 15px;
-      background-color: #ff4d6d;
-      color: white;
+      padding: 14px 28px;
+      background-color: #00ff88;
+      color: #000;
       border: none;
-      padding: 12px 24px;
-      font-size: 16px;
-      border-radius: 8px;
+      border-radius: 10px;
+      font-weight: bold;
       cursor: pointer;
+      font-size: 16px;
     }
-    .button:hover {
-      background-color: #ff1e4b;
+    .btn:hover {
+      background-color: #00e07a;
+    }
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .status {
+      margin-top: 30px;
+      font-size: 18px;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
-  <h1>🧠 Прогноз фриспинов</h1>
-  <p>Загрузи скрин из 1WIN, и мы покажем, когда сработает бонусный раунд 🎰</p>
+  <div class="container">
+    <div class="logo">📊 WinSignal</div>
+    <p>Для использования приложения нужно привязать новый и чистый аккаунт.</p>
+    <p><strong>ПРОМОКОД – DOGER</strong></p>
+    <a class="btn" href="https://1w.run/?p=SqoO" target="_blank">Пройти регистрацию</a>
+    <p style="margin-top: 15px; font-size: 14px; color: #aaa;">После регистрации появится Connected в правом верхнем углу</p>
 
-  <div class="upload-box">
-    <input type="file" id="screenshotInput" accept="image/*">
-    <button class="button" onclick="analyze()">Анализировать</button>
-  </div>
-
-  <div class="result-box" id="resultBox">
-    <h2>🎯 Прогноз готов!</h2>
-    <p>Следующий фриспин ожидается через 3–5 вращений.<br>Рекомендуется ставка x20.</p>
-    <p style="opacity: 0.7;">*Информация основана на статистике визуальных признаков</p>
+    <div class="status" id="prediction">
+      Загрузка прогноза...
+    </div>
   </div>
 
   <script>
-    function analyze() {
-      const input = document.getElementById('screenshotInput');
-      if (!input.files.length) {
-        alert("Загрузите скриншот перед анализом.");
-        return;
-      }
-      document.getElementById('resultBox').style.display = 'block';
+    const predictions = [
+      "🎰 Высокий шанс бонуски в течение ближайших 5 минут!",
+      "⚠️ Ожидается активация фриспинов, проверь игру!",
+      "🔥 Рекомендуем сделать 2-3 ставки — вероятен бонус!",
+      "📈 Алгоритм показывает рост RTP, время заходить!",
+      "🎯 Предсказание: возможен занос в ближайших 10 спинах.",
+      "🧠 AI считает: сейчас может выпасть бонус!"
+    ];
+
+    function showPrediction() {
+      const chance = Math.floor(Math.random() * 21) + 75; // от 75% до 95%
+      const prediction = predictions[Math.floor(Math.random() * predictions.length)];
+      const message = `${prediction} (Уверенность: ${chance}%)`;
+      document.getElementById("prediction").innerText = message;
     }
+
+    window.onload = showPrediction;
   </script>
 </body>
 </html>
